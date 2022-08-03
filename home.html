@@ -1,74 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" 
-    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="home.css">
 
     <title>Weather App</title>
 </head>
+
 <body>
 
     <div class="container">
 
-   
 
-    <div class="box" >
 
-        <div class="wave1"></div>
-        <div class="wave2"></div>
-        <div class="wave3"></div>
+        <div class="box">
 
-        <div id="weathercon">
-            <i class="fa-solid fa-sun" style="color: #eccc68"></i>
+            <div class="wave1"></div>
+            <div class="wave2"></div>
+            <div class="wave3"></div>
+
+            <div id="weathercon">
+                <i class="fa-solid fa-sun" style="color: #eccc68"></i>
+            </div>
+
+            <div class="info">
+                <h2 class="location"><i class="fa-solid fa-street-view"></i>Goa, In</h2>
+                <p id="date">WED | AUG 04 | 1:30</p>
+                <h1 class="temp">26.49</h1>
+                <h3 class="temp_min_max"> Min 23.57 | Max 24.56</h3>
+            </div>
+
+
+
         </div>
-
-        <div class="info">
-            <h2 class="location"><i class="fa-solid fa-street-view"></i>Goa, In</h2>
-            <p id="date">WED | AUG 04 | 1:30</p>
-            <h1 class="temp">26.49</h1>
-            <h3 class="temp_min_max"> Min 23.57 | Max 24.56</h3>
-        </div>
-
-
 
     </div>
 
-</div>
 
 
+    <script>
+        const curDate = document.getElementById("date");
+        let weathercon = document.getElementById("weathercon");
 
-<script>
-    const curDate = document.getElementById("date");
-    let weathercon = document.getElementById("weathercon");
+        const tempStatus = "Clouds";
 
-    const tempStatus = "Clouds";
+        // day 
+        const getCurrentDay = () => {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const d = new Date();
+            let day = days[d.getDay()];
+            return day;
+        };
 
-    const getCurrentDay =()=>{
-        var weekday = new Array(7);
+        // date
+        const getCurrentDate = () => {
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
+            var currentDate = new Date();
+            var day = currentDate.getDate();
+            var month = currentDate.getMonth();
+            var year = currentDate.getFullYear();
+            var mon = months[month];
+            console.log(day +"/" +months[month] +"/" + year)
 
-        weekday[0] = "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
 
-        let CurrentTime = new Date();
-        console.log(weekday[1]);
+            // Time 
+            let hours = currentDate.getHours();
+            let mins = currentDate.getMinutes();
 
-    };
+            let perios  ="AM";
 
-    
+            if(hours>11){
+                perios = "PM";
+                if(hours>12) hours -=12;
+            }
+            if(mins<10){
+                mins = "0"+mins
+            }
 
-</script>
-    
+            console.log(hours+":"+mins);
+
+            return `${day} / ${mon} / ${year} | ${hours}:${mins}`;
+
+        };
+
+        curDate.innerHTML =  getCurrentDate() +" | " + getCurrentDay();
+    </script>
+
 </body>
+
 </html>
